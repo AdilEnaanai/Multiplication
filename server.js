@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const { createConnection, initDatabase } = require('./database');
-
+//const { createConnection } = require('./database'); --- IGNORE ---
 const app = express();
 const PORT = 3000;
 
