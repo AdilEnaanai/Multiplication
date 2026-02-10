@@ -29,8 +29,11 @@ async function initDatabase() {
       password: dbConfig.password
     });
 
+    console.log('Connexion à la base de données réussie');
+
     // Créer la base de données si elle n'existe pas
     await connection.query(`CREATE DATABASE IF NOT EXISTS ${dbConfig.database}`);
+    console.log(`Base de données '${dbConfig.database}' créée ou déjà existante`);
     await connection.query(`USE ${dbConfig.database}`);
 
     // Créer la table des utilisateurs
