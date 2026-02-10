@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apprendre les Tables de Multiplications</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Écran de démarrage -->
+        <div id="start-screen" class="screen active">
+            <div class="welcome-box">
+                <h1>🎯 Tables de Multiplication</h1>
+                <p class="subtitle">Apprends en t'amusant !</p>
+                <input type="text" id="username" placeholder="Entre ton prénom" maxlength="30">
+                <button id="start-btn" class="btn btn-primary">Commencer</button>
+            </div>
+        </div>
+
+        <!-- Écran de jeu -->
+        <div id="game-screen" class="screen">
+            <div class="header">
+                <div class="user-info">
+                    <span class="user-name" id="display-name"></span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <span class="progress-text" id="progress-text">0%</span>
+                </div>
+            </div>
+
+            <div class="game-content">
+                <div class="question-card">
+                    <div class="validation-stars" id="validation-stars"></div>
+                    <div class="question">
+                        <span class="number" id="number1">0</span>
+                        <span class="operator">×</span>
+                        <span class="number" id="number2">0</span>
+                        <span class="equals">=</span>
+                        <span class="question-mark">?</span>
+                    </div>
+                </div>
+
+                <div class="answers-grid" id="answers-grid">
+                    <!-- Les réponses seront générées dynamiquement -->
+                </div>
+
+                <div class="feedback" id="feedback"></div>
+            </div>
+        </div>
+
+        <!-- Écran de félicitations -->
+        <div id="completion-screen" class="screen">
+            <div class="completion-box">
+                <h1>🎉 Félicitations !</h1>
+                <p class="completion-message">Tu as validé toutes les tables de multiplication !</p>
+                <div class="trophy">🏆</div>
+                <button id="restart-btn" class="btn btn-primary">Recommencer</button>
+                <button id="view-progress-btn" class="btn btn-secondary">Voir ma progression</button>
+            </div>
+        </div>
+
+        <!-- Modal de progression détaillée -->
+        <div id="progress-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>📊 Ta Progression Détaillée</h2>
+                <div id="progress-grid" class="progress-grid"></div>
+                <button class="btn btn-secondary" id="close-progress-btn">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
