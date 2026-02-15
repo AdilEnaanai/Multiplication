@@ -2,12 +2,18 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+<<<<<<< HEAD
 
 const { initDatabase } = require('./database');
 
 const multiplicationRoutes = require('./multiplication_app/multiplication.routes');
 
 //const { createConnection } = require('./database'); --- IGNORE ---
+=======
+const path = require('path');
+const { createConnection, initDatabase } = require('./database');
+
+>>>>>>> parent of f7e190a (test)
 const app = express();
 const PORT = 3000;
 
