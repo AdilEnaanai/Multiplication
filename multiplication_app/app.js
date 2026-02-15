@@ -45,7 +45,7 @@ async function startGame() {
     }
     
     try {
-        const response = await fetch('multiplication/api/users', {
+        const response = await fetch('api/users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: userName })
@@ -72,7 +72,7 @@ async function loadQuestion() {
         feedbackElem.textContent = '';
         feedbackElem.className = 'feedback';
         
-        const response = await fetch(`multiplication/api/question/${userId}`);
+        const response = await fetch(`api/question/${userId}`);
         const data = await response.json();
         
         if (data.completed) {
@@ -127,7 +127,7 @@ async function checkAnswer(answer) {
         const buttons = document.querySelectorAll('.answer-btn');
         buttons.forEach(btn => btn.disabled = true);
         
-        const response = await fetch('multiplication/api/answer', {
+        const response = await fetch('api/answer', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -181,7 +181,7 @@ async function checkAnswer(answer) {
 // Mettre à jour la barre de progression
 async function updateProgress() {
     try {
-        const response = await fetch(`multiplication/api/progress/${userId}`);
+        const response = await fetch(`api/progress/${userId}`);
         const data = await response.json();
         
         progressFill.style.width = `${data.percentage}%`;
@@ -204,7 +204,7 @@ function showCompletion() {
 // Afficher les détails de progression
 async function showProgressDetails() {
     try {
-        const response = await fetch(`multiplication/api/progress-details/${userId}`);
+        const response = await fetch(`api/progress-details/${userId}`);
         const data = await response.json();
         
         progressGrid.innerHTML = '';

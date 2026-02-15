@@ -184,7 +184,7 @@ router.get('/api/progress-details/:userId', async (req, res) => {
 
 // Servir le fichier HTML
 router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 
