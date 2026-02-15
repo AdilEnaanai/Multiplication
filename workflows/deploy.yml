@@ -34,5 +34,5 @@ jobs:
             cd /opt/multiplication
             sed -i "s|image: .*\/multiplication:latest|image: ${{ secrets.DOCKERHUB_USERNAME }}/multiplication:latest|g" docker-compose.yml
             docker compose pull
-            docker compose up -d
+            docker compose up -d --force-recreate
             docker image prune -f
