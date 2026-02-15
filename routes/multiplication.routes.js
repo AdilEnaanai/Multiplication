@@ -3,7 +3,7 @@ const { createConnection } = require('../database');
 const express = require('express');
 const router = express.Router();
 // Route pour créer ou récupérer un utilisateur
-router.post('/api/users', async (req, res) => {
+router.post('api/users', async (req, res) => {
   try {
     const { name } = req.body;
     const connection = await createConnection();
@@ -35,7 +35,7 @@ router.post('/api/users', async (req, res) => {
 });
 
 // Route pour récupérer une question aléatoire
-router.get('/api/question/:userId', async (req, res) => {
+router.get('api/question/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
     const connection = await createConnection();
@@ -88,7 +88,7 @@ router.get('/api/question/:userId', async (req, res) => {
 });
 
 // Route pour vérifier une réponse
-router.post('/api/answer', async (req, res) => {
+router.post('api/answer', async (req, res) => {
   try {
     const { userId, operationId, answer, correctAnswer } = req.body;
     const connection = await createConnection();
@@ -130,7 +130,7 @@ router.post('/api/answer', async (req, res) => {
 });
 
 // Route pour récupérer la progression globale
-router.get('/api/progress/:userId', async (req, res) => {
+router.get('api/progress/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
     const connection = await createConnection();
@@ -161,7 +161,7 @@ router.get('/api/progress/:userId', async (req, res) => {
 });
 
 // Route pour récupérer les détails de progression
-router.get('/api/progress-details/:userId', async (req, res) => {
+router.get('api/progress-details/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
     const connection = await createConnection();
@@ -183,7 +183,7 @@ router.get('/api/progress-details/:userId', async (req, res) => {
 });
 
 // Servir le fichier HTML
-router.get('/', (req, res) => {
+router.get('/multiplication', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
