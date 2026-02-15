@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const path = require('path');
-const { createConnection, initDatabase } = require('./database');
+
+const { initDatabase } = require('./database');
 
 const multiplicationRoutes = require('./routes/multiplication.routes');
 

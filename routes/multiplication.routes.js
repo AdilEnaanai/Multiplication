@@ -1,5 +1,9 @@
+const path = require('path');
+const { createConnection } = require('../database');
+const express = require('express');
+const router = express.Router();
 // Route pour créer ou récupérer un utilisateur
-app.post('/api/users', async (req, res) => {
+router.post('/api/users', async (req, res) => {
   try {
     const { name } = req.body;
     const connection = await createConnection();
@@ -31,7 +35,7 @@ app.post('/api/users', async (req, res) => {
 });
 
 // Route pour récupérer une question aléatoire
-app.get('/api/question/:userId', async (req, res) => {
+router.get('/api/question/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
     const connection = await createConnection();
@@ -84,7 +88,7 @@ app.get('/api/question/:userId', async (req, res) => {
 });
 
 // Route pour vérifier une réponse
-app.post('/api/answer', async (req, res) => {
+router.post('/api/answer', async (req, res) => {
   try {
     const { userId, operationId, answer, correctAnswer } = req.body;
     const connection = await createConnection();
@@ -126,7 +130,7 @@ app.post('/api/answer', async (req, res) => {
 });
 
 // Route pour récupérer la progression globale
-app.get('/api/progress/:userId', async (req, res) => {
+router.get('/api/progress/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
     const connection = await createConnection();
@@ -157,7 +161,7 @@ app.get('/api/progress/:userId', async (req, res) => {
 });
 
 // Route pour récupérer les détails de progression
-app.get('/api/progress-details/:userId', async (req, res) => {
+router.get('/api/progress-details/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
     const connection = await createConnection();
@@ -179,6 +183,9 @@ app.get('/api/progress-details/:userId', async (req, res) => {
 });
 
 // Servir le fichier HTML
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+
+module.exports = router;
