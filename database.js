@@ -4,7 +4,7 @@ const mysql = require('mysql2/promise');
 const dbConfig = {
   host: 'mysql',
   user: 'root',
-  password: '1111', // À modifier selon votre configuration
+  password: 'Enaanai@1981', // À modifier selon votre configuration
   database: 'multiplication_db'
 };
 

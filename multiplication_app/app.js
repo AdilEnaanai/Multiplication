@@ -74,6 +74,7 @@ async function loadQuestion() {
         
         const response = await fetch(`api/question/${userId}`);
         const data = await response.json();
+        console.log(data)
         
         if (data.completed) {
             showCompletion();
