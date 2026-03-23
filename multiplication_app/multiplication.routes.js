@@ -13,25 +13,36 @@ router.post('/api/users', async (req, res) => {
   try {
     const { name } = req.body;
     const connection = await createConnection();
-    
-    const [result] = await connection.query(
-      'INSERT INTO users (name) VALUES (?)',
+
+    // Chercher d'abord si l'utilisateur existe déjà
+    const [existing] = await connection.query(
+      'SELECT id FROM users WHERE name = ?',
       [name]
     );
-    
-    const userId = result.insertId;
-    
-    // Créer les entrées de progression pour toutes les opérations
-    const [operations] = await connection.query('SELECT id FROM operations');
-    
-    for (const op of operations) {
-      await connection.query(
-        `INSERT IGNORE INTO user_progress (user_id, operation_id, validation_level) 
-VALUES (?, ?, 0)`,
-        [userId, op.id]
+
+    let userId;
+
+    if (existing.length > 0) {
+      // Utilisateur connu → récupérer son ID et sa progression existante
+      userId = existing[0].id;
+    } else {
+      // Nouvel utilisateur → INSERT + initialiser sa progression
+      const [result] = await connection.query(
+        'INSERT INTO users (name) VALUES (?)',
+        [name]
       );
+      userId = result.insertId;
+
+      // Créer les entrées de progression pour toutes les opérations
+      const [operations] = await connection.query('SELECT id FROM operations');
+      for (const op of operations) {
+        await connection.query(
+          `INSERT IGNORE INTO user_progress (user_id, operation_id, validation_level) VALUES (?, ?, 0)`,
+          [userId, op.id]
+        );
+      }
     }
-    
+
     await connection.end();
     res.json({ userId, name });
   } catch (error) {

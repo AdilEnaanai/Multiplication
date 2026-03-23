@@ -24,6 +24,21 @@ const closeModalBtn = document.querySelector('.close-modal');
 const closeProgressBtn = document.getElementById('close-progress-btn');
 const progressGrid = document.getElementById('progress-grid');
 
+// Restaurer la session au chargement si elle existe
+window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('multiplicationUser');
+    if (saved) {
+        try {
+            const { id, name } = JSON.parse(saved);
+            userId = id;
+            userName = name;
+            usernameInput.value = name; // pré-remplir le champ avec le prénom
+        } catch (e) {
+            localStorage.removeItem('multiplicationUser');
+        }
+    }
+});
+
 // Événements
 startBtn.addEventListener('click', startGame);
 restartBtn.addEventListener('click', () => location.reload());
@@ -53,6 +68,10 @@ async function startGame() {
         
         const data = await response.json();
         userId = data.userId;
+
+        // Sauvegarder la session dans localStorage pour la retrouver à la prochaine visite
+        localStorage.setItem('multiplicationUser', JSON.stringify({ id: userId, name: userName }));
+
         displayName.textContent = `👋 Salut ${userName} !`;
         
         startScreen.classList.remove('active');
